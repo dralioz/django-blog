@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render, HttpResponse
 from .models import Post
+from .forms import PostForm
 
 # Create your views here.
 
@@ -15,7 +16,15 @@ def post_detail(request, id):
     return render(request, "post/detail.html",context)
 
 def post_create(request):
-    return render(request, "post/create.html",{})
+    form = PostForm
+    context = {"form":form}
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid:
+            form.save()
+    else:
+        form = PostForm
+    return render(request, "post/create.html",context)
 
 def post_update(request):
     return render(request, "post/update.html",{})

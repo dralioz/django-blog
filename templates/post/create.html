@@ -5,7 +5,11 @@
   <title>Title</title>
 </head>
 <body>
-  Merhaba, burası Post Oluşturma Sayfayı.
-  Post oluşturmak için gerekli bölümler bu sayfada olacak.
+  <form method = "POST">
+    {% csrf_token %}
+    <h1> Form </h1>
+    {{ form.as_p }}
+    <input type="submit" value="Gönder">
+  </form>
 </body>
 </html>
