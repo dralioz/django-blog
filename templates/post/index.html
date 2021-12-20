@@ -5,7 +5,11 @@
   <title>Title</title>
 </head>
 <body>
-  Merhaba, burası Post İndex Sayfayı.
-  Yayınlanmış tüm postlar burada liste şeklinde gözükecek.
+  {% for post in posts %}
+    {{post.id}}<br>
+    {{post.title}}<br>
+    {{post.content}}<br>
+    {{post.publishing_date}}<br>
+  {% endfor %}
 </body>
 </html>
