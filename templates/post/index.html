@@ -3,11 +3,19 @@
 {% block title %} Yayınlar - {{block.super}} {% endblock %}
 
 {% block body %}
-
+  <div class="container">
   {% for post in posts %}
-    <a href = "{{post.get_absolute_url}}">{{post.title}}</a><br>
-    {{post.content}}<br>
-    {{post.publishing_date}}<br>
+  <div class="card">
+    <!-- <img src="..." class="card-img-top" alt="..."> -->
+    <div class="card-body">
+      <h4 class="card-title">{{post.title}}<small>   {{post.publishing_date|timesince}} önce</small></h4>
+      <p class="card-text">{{post.content|linebreaks|truncatechars:100}}</p>
+      <a href = "{{post.get_absolute_url}}" class="btn btn-primary">Devamını Oku</a>
+      <a href = "{{post.get_update_url}}" class="btn btn-default">Güncelle</a>
+      <a href = "{{post.get_delete_url}}" class="btn btn-danger">Sil</a>
+    </div>
+  </div>
   {% endfor %}
+</div>
 
 {% endblock %}

@@ -2,6 +2,7 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
 from .models import Post
 from .forms import PostForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -33,6 +34,7 @@ def post_update(request, id):
     form = PostForm(request.POST or None, instance=post)
     if form.is_valid():
         form.save()
+        messages.success(request, "Başarılı bir şekilde oluşturuldu", extra_tags="mesaj-başarili")
         return HttpResponseRedirect(post.get_absolute_url())
     
     context = {"form":form}
