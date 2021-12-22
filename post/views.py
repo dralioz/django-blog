@@ -19,7 +19,7 @@ def post_detail(request, id):
 
 def post_create(request):
     if request.method == "POST":
-        form = PostForm(request.POST)
+        form = PostForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             post = form.save()
             return HttpResponseRedirect(post.get_absolute_url())
@@ -31,7 +31,7 @@ def post_create(request):
 
 def post_update(request, id):
     post = get_object_or_404(Post,id=id)
-    form = PostForm(request.POST or None, instance=post)
+    form = PostForm(request.POST or None, request.FILES or None, instance=post)
     if form.is_valid():
         form.save()
         messages.success(request, "Başarılı bir şekilde oluşturuldu", extra_tags="mesaj-başarili")
