@@ -6,6 +6,7 @@ from ckeditor.fields import RichTextField
 # Create your models here.
 class Post(models.Model):
     # Postun sahip olabileceği bir kaç özellikler.
+    user = models.ForeignKey('auth.User', verbose_name = "Yazar", on_delete=models.CASCADE)
     title = models.CharField(max_length = 120, verbose_name = "Başlık")
     content = RichTextField(verbose_name = "İçerik")
     publishing_date = models.DateTimeField(verbose_name = "Yayınlanma Tarihi", auto_now_add=True)
@@ -43,3 +44,13 @@ class Post(models.Model):
 
     class Meta:
         ordering =["-publishing_date"]
+
+class Comment(models.Model):
+
+    post = models.ForeignKey('post.Post', related_name='comments', on_delete=models.CASCADE)
+
+    name = models.CharField(max_length=200, verbose_name = "İsim - Soyisim")
+    
+    content = models.TextField(verbose_name="Yorum")
+
+    created_date = models.DateTimeField(auto_now_add=True)

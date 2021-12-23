@@ -1,0 +1,6 @@
+{% load crispy_forms_tags %}
+<form method = "POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form|crispy }}
+  <input class="btn btn-primary" type="submit" value="Gönder">
+</form>
