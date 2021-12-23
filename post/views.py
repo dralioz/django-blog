@@ -1,8 +1,9 @@
-from django.http.response import HttpResponseRedirect
+from django.http.response import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
 from .models import Post
 from .forms import PostForm
 from django.contrib import messages
+from django.utils.text import slugify
 
 # Create your views here.
 
@@ -12,12 +13,14 @@ def post_index(request):
     posts = Post.objects.all()
     return render(request, "post/index.html",{"posts":posts})
 
-def post_detail(request, id):
-    post = get_object_or_404(Post, id = id)
+def post_detail(request, slug):
+    post = get_object_or_404(Post, slug = slug)
     context = {"post":post}
     return render(request, "post/detail.html",context)
 
 def post_create(request):
+    if not request.user.is_authenticated:
+        return Http404()
     if request.method == "POST":
         form = PostForm(request.POST or None, request.FILES or None)
         if form.is_valid():
@@ -29,8 +32,10 @@ def post_create(request):
     context = {"form":form}
     return render(request, "post/create.html",context)
 
-def post_update(request, id):
-    post = get_object_or_404(Post,id=id)
+def post_update(request, slug):
+    if not request.user.is_authenticated:
+        return Http404()
+    post = get_object_or_404(Post,slug=slug)
     form = PostForm(request.POST or None, request.FILES or None, instance=post)
     if form.is_valid():
         form.save()
@@ -40,7 +45,9 @@ def post_update(request, id):
     context = {"form":form}
     return render(request, "post/create.html",context)
 
-def post_delete(request,id):
-    post = get_object_or_404(Post,id=id)
+def post_delete(request,slug):
+    if not request.user.is_authenticated:
+        return Http404()
+    post = get_object_or_404(Post,slug=slug)
     post.delete()
     return redirect("post:index")
