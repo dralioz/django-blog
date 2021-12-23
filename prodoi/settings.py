@@ -43,7 +43,10 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_cleanup',
     'ckeditor',
+    
 ]
+
+# 'captcha',
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -142,3 +145,7 @@ CKEDITOR_CONFIGS = {
         'width': '100%',
     },
 }
+
+# RECAPTCHA_PUBLIC_KEY = '6Ldye8MdAAAAAD-IDW_DmqbMw6x5YPYRN2NSjIaj'
+# RECAPTCHA_PRIVATE_KEY = '6Ldye8MdAAAAAHK2ktb1inPkLVg71DMAdxnMpTb9'
+# RECAPTCHA_PROXY = {'http': 'http://127.0.0.1:8000', 'https': 'https://127.0.0.1:8000'}
