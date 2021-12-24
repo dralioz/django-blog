@@ -44,5 +44,5 @@ For blog website, post structure is an app.
 Let's create an app. `python manage.py startapp app_name`.
 
 <br/>
-Continue . . .
+will continue . . .
 
