@@ -41,7 +41,7 @@ In programming we can write all codes in one script but this not a good way to d
 When we do that, we will notice there are same scripts with similar duty and names. So, to get rid of that complexity we will create applications.
 
 For blog website, post structure is an app.
-Let't create an app. `python manage.py startapp app_name`.
+Let's create an app. `python manage.py startapp app_name`.
 
 <br/>
 Continue . . .
