@@ -4,13 +4,26 @@ from .models import Post
 from .forms import PostForm, CommentForm
 from django.contrib import messages
 from django.utils.text import slugify
+from django.core.paginator import Paginator
+from django.db.models import Q
 
 # Create your views here.
 
 # Her bir sayfanın html dosyası oluşturulacak.
 
 def post_index(request):
-    posts = Post.objects.all()
+    post_list = Post.objects.all()
+    query = request.GET.get('q')
+    if query:
+        post_list = post_list.filter(Q(title__icontains=query) | 
+        Q(content__icontains=query) | Q(user__first_name__icontains=query) | 
+        Q(user__last_name__icontains=query)).distinct()
+
+    paginator = Paginator(post_list, 5) # Show 25 contacts per page.
+
+    page_number = request.GET.get('page')
+    posts = paginator.get_page(page_number)
+
     return render(request, "post/index.html",{"posts":posts})
 
 def post_detail(request, slug):

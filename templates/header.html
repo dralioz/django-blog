@@ -35,9 +35,11 @@
             <a class="nav-link" href="#">Hakkımızda</a>
           </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Ne bulmamı istersin?" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Bul</button>
+        <form class="d-flex" role = "search" method="GET", action = "">
+          <div class = "input-group">
+            <input class="form-control me-2" type="text" name="q" placeholder="Ne bulmamı istersin?" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Bul</button>
+          </div>
         </form>
       </div>
     </div>
